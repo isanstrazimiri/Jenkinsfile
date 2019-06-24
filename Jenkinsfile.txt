@@ -1,0 +1,25 @@
+pipeline {
+    agent any 
+
+    stages{
+        stage('Compile Stage') {
+            withMaven(maven : 'apache-maven-3.6.1') {
+                sh 'mvn clean compile'
+            }
+        }
+    }
+    stage("Testing Stage"){
+        steps{
+            withMaven(maven : 'apache-maven-3.6.1'){
+                sh 'mvn test'
+            }
+        }
+    }
+    stae ('Deployment stage){
+        steps{
+            withMaven(maven: 'apache-maven-3.6.1'){
+                sh 'mvn depoyment stage'
+            }
+        }
+    }
+}
